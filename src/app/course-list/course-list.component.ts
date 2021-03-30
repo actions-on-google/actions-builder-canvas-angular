@@ -41,12 +41,4 @@ export class CourseListComponent {
         }
       })
   }
-
-  share() {
-    window.alert('The product has been shared!');
-  }
-
-  onNotify(course: any) {
-    window.alert('You will be notified when the ' + course + ' goes on sale.')
-  }
 }
