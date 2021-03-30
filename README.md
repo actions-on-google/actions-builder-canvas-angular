@@ -6,6 +6,14 @@ which lets one browse and view video lectures by navigating with voice commands.
 The frontend is built with [Angular](http://angular.io/) and shows
 how to build a Canvas action using Angular.
 
+This Action benefits from a visually rich experience that allows you to
+provide video content combined with an intuitive conversational flow for
+users where [existing visual components](https://developers.google.com/assistant/conversational/prompts-rich)
+are not sufficient.
+
+![List of courses](screenshot_courselist.png)
+![Video lecture](screenshot_lecture.png)
+
 ### Prerequisites
 1. Node.js and NPM
     + We recommend installing using [nvm for Linux/Mac](https://github.com/creationix/nvm) and [nvm-windows for Windows](https://github.com/coreybutler/nvm-windows)
@@ -29,7 +37,6 @@ how to build a Canvas action using Angular.
 1. Navigate to `sdk/settings/settings.yaml`, and replace `<PROJECT_ID>` with your project ID
 1. Navigate to `sdk/custom/global/actions.intent.MAIN.yaml`, and replace `<PROJECT_ID>` with your project ID
 1. Navigate to `sdk/scenes/Main.yaml`, and replace `<PROJECT_ID>` with your project ID
-1. Navigate to `sdk/custom/global/actions.intent.PLAY_GAME.yaml`, and replace `<PROJECT_ID>` with your project ID
 1. Navigate to the `sdk/` directory by running `cd sdk` from the root directory of this project.
 1. Run `gactions login` to login to your account.
 1. Run `gactions push` to push your project.
@@ -38,6 +45,11 @@ how to build a Canvas action using Angular.
 ### Running this Sample
 + You can test your Action on any Google Assistant-enabled device on which the Assistant is signed into the same account used to create this project. Just say or type, “OK Google, talk to my test app”.
 + You can also use the Actions on Google Console simulator to test most features and preview on-device behavior.
+
+#### Using this Sample
+
++ You can say navigate the lists by giving the ordinal of the item, ie. "First item" or "Give me the second".
++ You can return to the previous list by saying "Go back" or "Previous".
 
 ## References & Issues
 + Questions? Go to [StackOverflow](https://stackoverflow.com/questions/tagged/actions-on-google) or the [Assistant Developer Community on Reddit](https://www.reddit.com/r/GoogleAssistantDev/).
