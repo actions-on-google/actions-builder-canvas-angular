@@ -14,28 +14,50 @@
  * limitations under the License.
  */
 
+export interface Course {
+  title: string;
+  semester: string;
+  lectures: Lecture[];
+}
+
+export interface Lecture {
+  title: string;
+  video: string;
+}
+
 // See https://www.youtube.com/user/MIT
-export const courseware = [{
-  title: 'MIT 14.01 Principles of Microeconomics',
-  semester: 'Fall 2018',
-  lectures: [{
-    title: 'Introduction and Supply & Demand',
-    video: '_OkTw766oCs',
-  }, {
-    title: 'Preferences and Utility Functions',
-    video: 'tCKk22kaZi4',
-  }, {
-    title: 'Budget Constraints and Constrained Choice',
-    video: 'jHEPQpSKdbg',
-  }]
-}, {
-  title: 'MIT 7.016 Introductory Biology',
-  semester: 'Fall 2018',
-  lectures: [{
-    title: 'Introduction, Course Organization',
-    video: 'KlVHqq38KJU',
-  }, {
-    title: 'Chemical Bombing and Molecular Interactions; Lipids and Membranes',
-    video: 'aKTOS0Nrlug',
-  }]
-}]
+export const courseware: Course[] = [
+  {
+    title: 'MIT 14.01 Principles of Microeconomics',
+    semester: 'Fall 2018',
+    lectures: [
+      {
+        title: 'Introduction and Supply & Demand',
+        video: '_OkTw766oCs',
+      },
+      {
+        title: 'Preferences and Utility Functions',
+        video: 'tCKk22kaZi4',
+      },
+      {
+        title: 'Budget Constraints and Constrained Choice',
+        video: 'jHEPQpSKdbg',
+      },
+    ],
+  },
+  {
+    title: 'MIT 7.016 Introductory Biology',
+    semester: 'Fall 2018',
+    lectures: [
+      {
+        title: 'Introduction, Course Organization',
+        video: 'KlVHqq38KJU',
+      },
+      {
+        title:
+          'Chemical Bombing and Molecular Interactions; Lipids and Membranes',
+        video: 'aKTOS0Nrlug',
+      },
+    ],
+  },
+];

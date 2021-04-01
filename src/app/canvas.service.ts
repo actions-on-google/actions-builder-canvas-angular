@@ -13,39 +13,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Injectable } from '@angular/core'
-import { Subject } from 'rxjs'
+import {Injectable} from '@angular/core';
+import {Subject} from 'rxjs';
 
 interface CanvasWindow {
-  interactiveCanvas: InteractiveCanvas
+  interactiveCanvas: InteractiveCanvas;
 }
 
 interface InteractiveCanvas {
-  ready: (callbacks: InteractiveCanvasCallbacks) => void
-  sendTextQuery: (textQuery: string) => Promise<State>
-  getHeaderHeightPx: () => Promise<number>
-  setCanvasState: (state: Object) => Promise<void>
+  ready: (callbacks: InteractiveCanvasCallbacks) => void;
+  sendTextQuery: (textQuery: string) => Promise<State>;
+  getHeaderHeightPx: () => Promise<number>;
+  setCanvasState: (state: Object) => Promise<void>;
 }
 
 interface InteractiveCanvasCallbacks {
-  onUpdate: (data: Object[]) => Promise<void> | undefined
-  onTtsMark: (markName: string) => void
+  onUpdate: (data: Object[]) => Promise<void> | undefined;
+  onTtsMark: (markName: string) => void;
 }
 
-type State = 'READY' | 'BLOCKED' | 'UNKNOWN'
+type State = 'READY' | 'BLOCKED' | 'UNKNOWN';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CanvasService implements InteractiveCanvasCallbacks {
-  interactiveCanvas: InteractiveCanvas
-  private readonly data: Subject<Object[]>
-  private readonly markName: Subject<string>
+  interactiveCanvas: InteractiveCanvas;
+  private readonly data: Subject<Object[]>;
+  private readonly markName: Subject<string>;
   constructor() {
-    const appWindow = window as unknown as CanvasWindow
-    this.interactiveCanvas = appWindow.interactiveCanvas
-    this.data = new Subject<Object[]>()
-    this.markName = new Subject<string>()
+    const appWindow = (window as unknown) as CanvasWindow;
+    this.interactiveCanvas = appWindow.interactiveCanvas;
+    this.data = new Subject<Object[]>();
+    this.markName = new Subject<string>();
     this.interactiveCanvas.ready({
       onUpdate: this.onUpdate.bind(this),
       onTtsMark: this.onTtsMark.bind(this),
@@ -53,19 +53,19 @@ export class CanvasService implements InteractiveCanvasCallbacks {
   }
 
   getUpdateDataSubject(): Subject<Object[]> {
-    return this.data
+    return this.data;
   }
 
   onUpdate(data: Object[]) {
-    this.data.next(data)
-    return undefined
+    this.data.next(data);
+    return undefined;
   }
 
   getMarkNameSubject(): Subject<string> {
-    return this.markName
+    return this.markName;
   }
 
   onTtsMark(markName: string) {
-    this.markName.next(markName)
+    this.markName.next(markName);
   }
 }

@@ -13,39 +13,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, NgZone, OnInit } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
-import { CanvasService } from '../canvas.service'
-import { courseware } from '../courseware'
+import {Component, NgZone, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CanvasService} from '../canvas.service';
+import {Course, courseware, Lecture} from '../courseware';
+import {CanvasData} from '../myapp.utils';
 
-let youtubeApiLoaded = false
+let youtubeApiLoaded = false;
 
 @Component({
   selector: 'app-lecture',
   templateUrl: './lecture.component.html',
-  styleUrls: []
+  styleUrls: [],
 })
 export class LectureComponent implements OnInit {
-  courses = courseware
-  course
-  courseId
-  lecture
-  videoId
+  courses = courseware;
+  course!: Course;
+  courseId!: number;
+  lecture!: Lecture;
+  videoId!: string;
   constructor(
     private route: ActivatedRoute,
     private canvasService: CanvasService,
     private ngZone: NgZone,
-    private router: Router,
+    private router: Router
   ) {
-    this.canvasService.getUpdateDataSubject()
-    .subscribe((data: any[]) => {
-      const id = Number(data[0]?.id)
-      if (id === -1) {
-        this.ngZone.run(() => {
-          this.router.navigate(['/course', this.courseId])
-        })
-      }
-    })
+    this.canvasService
+      .getUpdateDataSubject()
+      .subscribe((data: CanvasData[]) => {
+        const id = Number(data[0]?.id);
+        if (id === -1) {
+          this.ngZone.run(() => {
+            this.router.navigate(['/course', this.courseId]);
+          });
+        }
+      });
   }
 
   ngOnInit() {
@@ -61,13 +63,13 @@ export class LectureComponent implements OnInit {
     }
 
     // Get the product id from the current route.
-    const routeParams = this.route.snapshot.paramMap
-    this.courseId = Number(routeParams.get('courseId'))
-    const lectureId = Number(routeParams.get('lectureId'))
+    const routeParams = this.route.snapshot.paramMap;
+    this.courseId = Number(routeParams.get('courseId'));
+    const lectureId = Number(routeParams.get('lectureId'));
 
     // Find the product that correspond with the id provided in route.
-    this.course = courseware[this.courseId]
-    this.lecture = this.course.lectures[lectureId]
-    this.videoId = this.lecture.video
+    this.course = courseware[this.courseId];
+    this.lecture = this.course.lectures[lectureId];
+    this.videoId = this.lecture.video;
   }
 }
