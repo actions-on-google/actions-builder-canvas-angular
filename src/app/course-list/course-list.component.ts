@@ -17,7 +17,7 @@ import {Component, NgZone} from '@angular/core';
 import {courseware} from '../courseware';
 import {CanvasService} from '../canvas.service';
 import {Router} from '@angular/router';
-import {CanvasData} from '../myapp.utils';
+import {CanvasData, parseId} from '../myapp.utils';
 
 @Component({
   selector: 'app-course-list',
@@ -34,7 +34,7 @@ export class CourseListComponent {
     this.canvasService
       .getUpdateDataSubject()
       .subscribe((data: CanvasData[]) => {
-        const id = Number(data[0]?.id);
+        const id = parseId(data[0]);
         if (id > -1) {
           // https://stackoverflow.com/questions/53645534/navigation-triggered-outside-angular-zone-did-you-forget-to-call-ngzone-run
           this.ngZone.run(() => {
