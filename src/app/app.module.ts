@@ -13,18 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http'
-import { YouTubePlayerModule } from '@angular/youtube-player'
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {RouterModule} from '@angular/router';
+import {ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {YouTubePlayerModule} from '@angular/youtube-player';
 
-import { AppComponent } from './app.component';
-import { TopBarComponent } from './top-bar/top-bar.component';
-import { CourseListComponent } from './course-list/course-list.component'
-import { CourseDetailsComponent } from './course-details/course-details.component'
-import { LectureComponent } from './lecture/lecture.component'
+import {AppComponent} from './app.component';
+import {TopBarComponent} from './top-bar/top-bar.component';
+import {CourseListComponent} from './course-list/course-list.component';
+import {CourseDetailsComponent} from './course-details/course-details.component';
+import {LectureComponent} from './lecture/lecture.component';
 
 @NgModule({
   imports: [
@@ -33,9 +33,9 @@ import { LectureComponent } from './lecture/lecture.component'
     ReactiveFormsModule,
     YouTubePlayerModule,
     RouterModule.forRoot([
-      { path: '', component: CourseListComponent },
-      { path: 'course/:courseId', component: CourseDetailsComponent },
-      { path: 'course/:courseId/:lectureId', component: LectureComponent },
+      {path: '', component: CourseListComponent},
+      {path: 'course/:courseId', component: CourseDetailsComponent},
+      {path: 'course/:courseId/:lectureId', component: LectureComponent},
     ]),
   ],
   declarations: [
@@ -43,10 +43,8 @@ import { LectureComponent } from './lecture/lecture.component'
     TopBarComponent,
     CourseListComponent,
     CourseDetailsComponent,
-    LectureComponent
+    LectureComponent,
   ],
-  bootstrap: [
-    AppComponent
-  ]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

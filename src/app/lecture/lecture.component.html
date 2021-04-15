@@ -10,6 +10,12 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-<h3>{{ lecture.title }}</h3>
+<div *ngIf="lecture else noLecture">
+  <h3>{{ lecture.title }}</h3>
 
-<youtube-player [videoId]="videoId"></youtube-player>
+  <youtube-player [videoId]="videoId"></youtube-player>
+</div>
+
+<ng-template #noLecture>
+  <h3>Lecture not found</h3>
+</ng-template>

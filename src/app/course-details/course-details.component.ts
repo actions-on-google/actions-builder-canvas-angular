@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, NgZone, OnInit } from '@angular/core'
-import { ActivatedRoute, Router } from '@angular/router'
-import { CanvasService } from '../canvas.service'
+import {Component, NgZone, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CanvasService} from '../canvas.service';
 
-import { courseware } from '../courseware'
+import {Course, courseware} from '../courseware';
+import {CanvasData} from '../myapp.utils';
 
 @Component({
   selector: 'app-course-details',
@@ -25,36 +26,37 @@ import { courseware } from '../courseware'
   styleUrls: [],
 })
 export class CourseDetailsComponent implements OnInit {
-  course
-  courseId
+  course!: Course;
+  courseId!: number;
   constructor(
     private route: ActivatedRoute,
     private canvasService: CanvasService,
     private ngZone: NgZone,
-    private router: Router,
+    private router: Router
   ) {
-    this.canvasService.getUpdateDataSubject()
-    .subscribe((data: any[]) => {
-      const id = Number(data[0]?.id)
-      if (id > -1) {
-        // https://stackoverflow.com/questions/53645534/navigation-triggered-outside-angular-zone-did-you-forget-to-call-ngzone-run
-        this.ngZone.run(() => {
-          this.router.navigate(['/course', this.courseId, id])
-        })
-      } else if (id === -1) {
-        this.ngZone.run(() => {
-          this.router.navigate(['/course'])
-        })
-      }
-    })
+    this.canvasService
+      .getUpdateDataSubject()
+      .subscribe((data: CanvasData[]) => {
+        const id = Number(data[0]?.id);
+        if (id > -1) {
+          // https://stackoverflow.com/questions/53645534/navigation-triggered-outside-angular-zone-did-you-forget-to-call-ngzone-run
+          this.ngZone.run(() => {
+            this.router.navigate(['/course', this.courseId, id]);
+          });
+        } else if (id === -1) {
+          this.ngZone.run(() => {
+            this.router.navigate(['/course']);
+          });
+        }
+      });
   }
 
   ngOnInit() {
     // First get the product id from the current route.
-    const routeParams = this.route.snapshot.paramMap
-    this.courseId = Number(routeParams.get('courseId'))
+    const routeParams = this.route.snapshot.paramMap;
+    this.courseId = Number(routeParams.get('courseId'));
 
     // Find the product that correspond with the id provided in route.
-    this.course = courseware[this.courseId]
+    this.course = courseware[this.courseId];
   }
 }
