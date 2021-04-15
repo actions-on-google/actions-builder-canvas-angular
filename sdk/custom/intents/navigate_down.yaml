@@ -14,7 +14,7 @@
 parameters:
 - name: ordinal
   type:
-    name: ordinal
+    name: actions.type.Number
 trainingPhrases:
 - Give me the ($ordinal 'second' auto=true)
 - I want the ($ordinal 'first' auto=true) item

@@ -16,3 +16,8 @@
 export interface CanvasData {
   id?: string;
 }
+
+export const parseId = (data: CanvasData) => {
+  // "First" -> data.id = 1 -> index = 0
+  return Math.max(Number(data?.id || 0) - 1, 0);
+};

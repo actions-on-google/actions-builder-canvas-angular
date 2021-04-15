@@ -17,7 +17,7 @@ import {Component, NgZone, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CanvasService} from '../canvas.service';
 import {Course, courseware, Lecture} from '../courseware';
-import {CanvasData} from '../myapp.utils';
+import {CanvasData, parseId} from '../myapp.utils';
 
 let youtubeApiLoaded = false;
 
@@ -41,7 +41,7 @@ export class LectureComponent implements OnInit {
     this.canvasService
       .getUpdateDataSubject()
       .subscribe((data: CanvasData[]) => {
-        const id = Number(data[0]?.id);
+        const id = parseId(data[0]);
         if (id === -1) {
           this.ngZone.run(() => {
             this.router.navigate(['/course', this.courseId]);
